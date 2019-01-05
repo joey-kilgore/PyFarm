@@ -6,12 +6,16 @@ outputs = []
 
 def runScript(path, args):
     # make connection
+    py_file = open(path)
+    file_content =  py_file.read()
+    py_file.close()
+
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
     client = gspread.authorize(creds)
     sheet = client.open('pyfarm-hh').sheet1
-    new_row = [path, 'foo']
+    new_row = [file_content, 'foo']
     sheet.append_row(new_row)
     #sheet.update_cell(4, 1, path)
 
