@@ -25,7 +25,7 @@ def runScript(path, args):
     # push args
 
     # wait for response
-    
+
     print("run")
 
 
