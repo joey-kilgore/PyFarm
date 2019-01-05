@@ -1,5 +1,13 @@
-import pymysql
 import PyFarm
+
+def getIdNum():
+    id = 1
+    cell = PyFarm.sheet.cell(id,1)
+    while cell.value != '':
+        id += 1
+        cell =PyFarm.sheet.cell(id,1)
+    PyFarm.sheet.update_cell(id,1,'Machine Connected')
+    return id   
 
 def waitForConnection():
     # wait for connection
@@ -16,6 +24,10 @@ def getScript():
     # query for script
     print("getScript")
 
+
+testArgs = [[1],[2],[3]]
+argsIndex = 0
+
 def getArgs():
     # query for args
     # if there are args
@@ -23,13 +35,21 @@ def getArgs():
     #   return true
     # else (there are no args to test)
     #   return false
-    print("getArgs")
+    global argsIndex
+    print("get args")
+    if(argsIndex < len(testArgs)):
+        PyFarm.setInput(testArgs[argsIndex])
+        argsIndex += 1
+        return True
+    else:
+        return False
 
 
 def callScript():
     # call the script
     # it should save all output to the module
     print("runScript")
+    PyFarm.output(PyFarm.input(0) *2)
 
 
 def sendOutput():
@@ -38,4 +58,5 @@ def sendOutput():
     print("sendOutput")
 
 
-    
+PyFarm.makeConnection()
+id = getIdNum()
