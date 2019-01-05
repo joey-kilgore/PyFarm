@@ -3,3 +3,4 @@ PyFarmChild.py
 client_secret.json
 PyFarmBootstrap.py
 TestScript.py
+__pycache__/PyFarm.cpython-36.pyc
