@@ -3,8 +3,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 arg = []
 outputs = []
-idnum = 0
-sheet = None
+sheet1 = None
+sheet2 = None
 
 def runScript(path, args):
     # make connection
@@ -13,7 +13,7 @@ def runScript(path, args):
     py_file.close()
 
     new_row = [file_content]
-    sheet.append_row(new_row)
+    sheet1.append_row(new_row)
 
     # push script
     # push args
@@ -25,21 +25,37 @@ def makeConnection():
              'https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
     client = gspread.authorize(creds)
-    global sheet
-    sheet = client.open('pyfarm-hh').get_worksheet(1)
-    print(sheet.cell(1,1).value)
+    global sheet1
+    global sheet2
+    sheet1 = client.open('pyfarm-hh').get_worksheet(0)
+    sheet2 = client.open('pyfarm-hh').get_worksheet(1)
     
 
 
 
 def input(num):
+    print(num)
     return arg[num]
 
 
 def setInput(listArgs):
+    global arg
     arg = listArgs
 
 def output(val):
+    global outputs
     outputs.append(val)
+    print(val)
+
+def sendOutput(argIndex, numArgs):
+    makeConnection()
+    for out in outputs:
+        sheet1.update_cell(argIndex,numArgs, out)
+        numArgs += 1
+
+def clearOutput():
+    global outputs
+    outputs.clear()    
+
 
 
