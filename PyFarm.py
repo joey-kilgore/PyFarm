@@ -7,17 +7,19 @@ idnum = 0
 sheet = None
 
 def runScript(path, args):
-    # make connection
+    
+    # read file and store into a string
     py_file = open(path)
     file_content =  py_file.read()
     py_file.close()
-
+    
     new_row = [file_content]
     sheet.append_row(new_row)
 
-    # push script
     # push args
+
     # wait for response
+
     print("run")
 
 def makeConnection():
