@@ -12,7 +12,7 @@ def runScript(path, args):
 
 
 def input(num):
-    print("input")
+    return arg[num]
 
 
 def setInput(listArgs):
@@ -20,5 +20,5 @@ def setInput(listArgs):
 
 def output(val):
     outputs.append(val)
-    
+
 
