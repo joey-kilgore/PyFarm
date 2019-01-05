@@ -1,6 +1,5 @@
 import gspread
 import time
-import PyFarmChild
 from oauth2client.service_account import ServiceAccountCredentials
 
 arg = []
@@ -16,8 +15,8 @@ def runScript(path, args):
     # Called by user; starts execution of the script 
     file_content = readFile(path)
     makeConnection()
-    pushScript(file_content)
     pushArgs(args)
+    pushScript(file_content)
     #processOutput()        
     
 
