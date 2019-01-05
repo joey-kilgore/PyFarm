@@ -34,9 +34,7 @@ def makeConnection():
     sheet1 = client.open('pyfarm-hh').get_worksheet(0)
     sheet2 = client.open('pyfarm-hh').get_worksheet(1)
     
-
 def input(num):
-    print(num)
     return arg[num]
 
 
@@ -90,11 +88,10 @@ def pushArgs(args):
     i = 1
     for argument in args:
         j = 2
+        sheet.update_cell(i, 1, "0")
         for val in argument:
-            sheet.update_cell(i, 1, "0")
             sheet.update_cell(i, j, val)
-            j+=1
-        sheet.update_cell(i, j, "N/A")    
+            j+=1 
         i+=1
     global rowCount    
     rowCount = i
