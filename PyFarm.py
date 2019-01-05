@@ -5,6 +5,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 arg = []
 outputs = []
+sheet1 = None
+sheet2 = None
 idnum = 0
 sheet = None
 client = None
@@ -17,7 +19,6 @@ def runScript(path, args):
     pushScript(file_content)
     pushArgs(args)
     #processOutput()        
-
     
 
 def makeConnection():
@@ -25,10 +26,17 @@ def makeConnection():
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+
     global client
-    client = gspread.authorize(creds)  
-   
+    client = gspread.authorize(creds)
+    global sheet1
+    global sheet2
+    sheet1 = client.open('pyfarm-hh').get_worksheet(0)
+    sheet2 = client.open('pyfarm-hh').get_worksheet(1)
+    
+
 def input(num):
+    print(num)
     return arg[num]
 
 
@@ -37,7 +45,20 @@ def setInput(listArgs):
     arg = listArgs
 
 def output(val):
+    global outputs
     outputs.append(val)
+    print(val)
+
+def sendOutput(argIndex, numArgs):
+    makeConnection()
+    for out in outputs:
+        sheet1.update_cell(argIndex,numArgs, out)
+        numArgs += 1
+
+def clearOutput():
+    global outputs
+    outputs.clear()    
+
 
 def readFile(path):
     # read file and store into a string
