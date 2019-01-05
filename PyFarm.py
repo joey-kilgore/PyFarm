@@ -15,16 +15,13 @@ def runScript(path, args):
     creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
     client = gspread.authorize(creds)
     sheet = client.open('pyfarm-hh').sheet1
-    new_row = [file_content, 'foo']
+    new_row = [file_content]
     sheet.append_row(new_row)
-    #sheet.update_cell(4, 1, path)
 
     # push script
-    server_storage = path
     # push args
     # wait for response
     print("run")
-    print(server_storage)
 
 
 def input(num):
