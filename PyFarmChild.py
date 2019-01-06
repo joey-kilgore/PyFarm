@@ -15,9 +15,6 @@ def getIdNum():
     PyFarm.sheet2.update_cell(id+1,2, id)
     return id   
 
-def waitForConnection():
-    print("hi")
-
 def runScript():
     script = getScript()
     global argIndex
@@ -26,7 +23,7 @@ def runScript():
         print(str(PyFarm.arg))
         finalScript = script[:script.find("import PyFarm")] + "\nPyFarm.setInput("+str(PyFarm.arg)+")\n"+script[script.find("import PyFarm"):]+"\nPyFarm.sendOutput("+str(argIndex)+","+str(numArgs)+")\nPyFarm.clearOutput()"
         exec(finalScript)
-        PyFarm.sheet1.update_cell(argIndex,1,'1')
+        PyFarm.sheet1.update_cell(argIndex,1,'-1')
         argIndex = 0
         numArgs = 1
 
@@ -48,9 +45,10 @@ def getArgs():
         status = PyFarm.sheet1.cell(argIndex,1).value
         
     argList = []
+    global id
     # if there are args
     if status == '0':
-        PyFarm.sheet1.update_cell(argIndex,1,'-1')
+        PyFarm.sheet1.update_cell(argIndex,1,id)
         #   set args
         global numArgs
         arg = '0'
