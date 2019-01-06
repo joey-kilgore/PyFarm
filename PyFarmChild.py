@@ -14,7 +14,7 @@ def getIdNum():
 
     PyFarm.sheet2.update_cell(id+1,1,'Machine Connected')
     PyFarm.sheet2.update_cell(id+1,2, id)
-    PyFarm.sheet2.update_cell(id+1,3, platform.processor)
+    PyFarm.sheet2.update_cell(id+1,3, platform.processor())
     return id   
 
 def runScript():
