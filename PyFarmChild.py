@@ -26,6 +26,8 @@ def runScript():
         PyFarm.sheet1.update_cell(argIndex,1,'-1')
         argIndex = 0
         numArgs = 1
+    PyFarm.sheet2.update_cell(1,1,'')
+    getScript()
 
 
 def getScript():
