@@ -1,5 +1,6 @@
 import PyFarm
 import time
+import platform
 
 argIndex = 0
 numArgs = 1
@@ -13,10 +14,8 @@ def getIdNum():
 
     PyFarm.sheet2.update_cell(id+1,1,'Machine Connected')
     PyFarm.sheet2.update_cell(id+1,2, id)
+    PyFarm.sheet2.update_cell(id+1,3, platform.processor())
     return id   
-
-def waitForConnection():
-    print("hi")
 
 def runScript():
     script = getScript()
@@ -33,6 +32,8 @@ def runScript():
         PyFarm.sheet1.update_cell(argIndex,1,'1')
         argIndex = 0
         numArgs = 1
+    PyFarm.sheet2.update_cell(1,1,'')
+    getScript()
 
 
 def getScript():
@@ -52,9 +53,10 @@ def getArgs():
         status = PyFarm.sheet1.cell(argIndex,1).value
         
     argList = []
+    global id
     # if there are args
     if status == '0':
-        PyFarm.sheet1.update_cell(argIndex,1,'-1')
+        PyFarm.sheet1.update_cell(argIndex,1,id)
         #   set args
         global numArgs
         arg = '0'
