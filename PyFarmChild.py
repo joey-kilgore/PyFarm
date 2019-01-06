@@ -29,7 +29,9 @@ def runScript():
         argIndex = 0
         numArgs = 1
     PyFarm.sheet2.update_cell(1,1,'')
-    getScript()
+    argIndex = 0
+    numArgs = 1
+    runScript()
 
 
 def getScript():
