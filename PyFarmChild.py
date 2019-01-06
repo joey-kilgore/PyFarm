@@ -24,8 +24,12 @@ def runScript():
     while getArgs():
         print(str(PyFarm.arg))
         finalScript = script[:script.find("import PyFarm")] + "\nPyFarm.setInput("+str(PyFarm.arg)+")\n"+script[script.find("import PyFarm"):]+"\nPyFarm.sendOutput("+str(argIndex)+","+str(numArgs)+")\nPyFarm.clearOutput()"
+        
+        #Start Elapsed Time
         exec(finalScript)
-        PyFarm.sheet1.update_cell(argIndex,1,'-1')
+        #Get Elapsed Time
+        
+        PyFarm.sheet1.update_cell(argIndex,1,'1')
         argIndex = 0
         numArgs = 1
     PyFarm.sheet2.update_cell(1,1,'')
